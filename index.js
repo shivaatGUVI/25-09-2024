@@ -54,6 +54,33 @@ function deleteFunction(event) {
   createElement(dataArray);
 }
 
+function updateFunction(event) {
+  let value = prompt("What to update in name?");
+  //   let value2 = prompt("What to update in email?");
+
+  let currentId = event.target.id; // index value of the array (dataArray)
+
+  console.log(currentId);
+
+  let newArray = dataArray.map((element, index) => {
+    // if the element matches
+    if (index == currentId) {
+      if (value != null) {
+        element.first_name = value;
+        // element.email = value2;
+      } else {
+        element.first_name += " 1";
+      }
+    }
+
+    return element;
+  });
+
+  console.log(newArray);
+  dataArray = newArray;
+  createElement(dataArray);
+}
+
 function createElement(inputArray) {
   //   inputArray = [{}, {}, {}];
 
@@ -72,7 +99,9 @@ function createElement(inputArray) {
     emailElement.innerText = currentElement.email;
 
     let updateElement = document.createElement("button");
-    updateElement.innerText = "Update";
+    updateElement.setAttribute("id", index);
+    updateElement.innerText = "Update " + (index + 1);
+    updateElement.addEventListener("click", updateFunction);
 
     let deleteElement = document.createElement("button");
     deleteElement.setAttribute("id", index); // uniquely identify and delete from the array
