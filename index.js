@@ -1,4 +1,5 @@
 let container = document.getElementById("container");
+let createButton = document.getElementById("create");
 
 let server = "https://reqres.in/api/users?page=2";
 let dataArray = [];
@@ -38,6 +39,28 @@ async function getData() {
 }
 
 document.addEventListener("DOMContentLoaded", getData);
+
+// || && ??
+
+// ?? -> it would check for null or undefined
+// if the left value is from one of the above things,  return the right value
+// or the left
+
+createButton.addEventListener("click", function () {
+  let name = prompt("What should be the name?") ?? "default name";
+  let emailInput = prompt("What should be the email?") ?? "default email";
+
+  let newObject = {
+    first_name: name,
+    email: emailInput,
+  };
+
+  //   Object.first_name
+
+  dataArray.push(newObject);
+
+  createElement(dataArray);
+});
 
 function deleteFunction(event) {
   let currentId = event.target.id; // index value of the array (dataArray)
